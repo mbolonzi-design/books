@@ -14,8 +14,8 @@ class BooksController < ApplicationController
     end
 
     def create 
-        book = Book.new(book_params)
-        if book.save
+        book = Book.create(book_params)
+        if book
             render json: book, status: :created
         else
             render json: {error: "Book not created"}, status: :bad_request
@@ -25,6 +25,6 @@ class BooksController < ApplicationController
     private
 
     def book_params
-        params.require(:book).permit(:title, :author, :genre, :year, :price)
+        params.permit(:title, :author, :genre, :year, :price)
     end
 end
